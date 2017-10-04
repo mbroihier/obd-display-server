@@ -1,0 +1,19 @@
+{
+  "name": "obd-display-server",
+  "version": "1.0.0",
+  "description": "This application supports a server that displays OBD logs Collected by the obd_logger",
+  "main": "obd-display-server.js",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "jquery": "^3.2.1",
+    "jsdom": "^11.1.0",
+    "ws": "^3.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mark Broihier",
+  "license": "MIT"
+}
