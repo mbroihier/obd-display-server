@@ -20,7 +20,7 @@ window.onload = function(){
       mode: "time",
       timeformat: "%m/%d/%y %H:%M"
     },
-    yaxes: [{position: "left"}, {position: "right"}],
+    yaxes: [{position: "left"}],
     legend: {
       show: true,
       container: $("#legend")
@@ -72,6 +72,7 @@ window.onload = function(){
     });
   // Create list of series
   let insertionPoint = document.querySelector("#ownAxis");
+  let checkedBoxes = 0;
   for (let seriesIndex = 0; seriesIndex < arrayOfObjects.length; seriesIndex++) {
     let series = arrayOfObjects[seriesIndex];
     let box = document.createElement("input");
@@ -84,9 +85,14 @@ window.onload = function(){
       for (let seriesIndex = 0; seriesIndex < arrayOfObjects.length; seriesIndex++) {
         if (this.getAttribute("name") === arrayOfObjects[seriesIndex].label) {
           if (arrayOfObjects[seriesIndex].yaxis === 1) {
-            arrayOfObjects[seriesIndex].yaxis = 2;
+            checkedBoxes++;
+            if (options.yaxes.length < checkedBoxes + 1) {
+              options.yaxes.push({position: "right"});
+            }
+            arrayOfObjects[seriesIndex].yaxis = checkedBoxes + 1;
           } else {
             arrayOfObjects[seriesIndex].yaxis = 1;
+            checkedBoxes--;
           }
           $.plot($("#placeholder"),arrayOfObjects,options);
           found = true;
