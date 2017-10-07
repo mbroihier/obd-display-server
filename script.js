@@ -112,6 +112,7 @@ window.onload = function(){
           } 
         }
       }
+      console.log("processing " + this.getAttribute("name") + ", checkedBoxes: " + checkedBoxes);
       if (!found) {
         console.log("logic error - element reference not found");
       }
