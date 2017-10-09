@@ -46,7 +46,6 @@ window.onload = function(){
     box.setAttribute("type", "checkbox");
     box.setAttribute("value", item.series.label);
     box.setAttribute("name", item.series.label);
-    //box.setAttribute("checked","");
     box.innerHTML = item.series.label;
     box.onclick = function(event) {
       for (let seriesIndex = 0; seriesIndex < removedObjects.length; seriesIndex++) {
@@ -103,9 +102,14 @@ window.onload = function(){
         for (let seriesIndex = 0; seriesIndex < removedObjects.length; seriesIndex++) {
           if (this.getAttribute("name") === removedObjects[seriesIndex].label) {
             if (removedObjects[seriesIndex].yaxis === 1) {
-              removedObjects[seriesIndex].yaxis = 2;
+              checkedBoxes++;
+              if (options.yaxes.length < checkedBoxes + 1) {
+                options.yaxes.push({position: "right"});
+              }
+              removedObjects[seriesIndex].yaxis = checkedBoxes + 1;
             } else {
               removedObjects[seriesIndex].yaxis = 1;
+              checkedBoxes--;
             }
             found = true;
             break;
