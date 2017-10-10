@@ -11,6 +11,8 @@ var spawn = require("child_process").spawn;
 var execSync = require("child_process").execSync;
 // Read main html page - this will be parsed later
 let mainPageContents = fs.readFileSync("./index.html");
+// Read graphing html page - this will be parsed later
+let graphPageContents = fs.readFileSync("./graph.html");
 // Read log entry page - this will be reissued later
 // create an express server to make a static file server
 var app = express();
@@ -39,7 +41,19 @@ app.get("/", function(request, response, next) {
     let document = dom.window.document;
     let insertionPoint = document.querySelector("#list");
     for (let file of files) {
-      if (file.indexOf("graph") >= 0) {
+      if (file.indexOf("plot_data_") >= 0) {
+        let element = document.createElement("a");
+        let graphFile = file.replace("plot_data_", "graph_").replace(".js", ".html");
+        element.setAttribute("href",graphFile);
+        element.innerHTML = graphFile;
+        let listElement = document.createElement("li");
+        listElement.appendChild(element);
+        insertionPoint.appendChild(listElement);
+      }
+    }
+    insertionPoint = document.querySelector("#JSONlist");
+    for (let file of files) {
+      if (file.indexOf("plot_data_") >= 0) {
         let element = document.createElement("a");
         element.setAttribute("href",file);
         element.innerHTML = file;
@@ -48,6 +62,16 @@ app.get("/", function(request, response, next) {
         insertionPoint.appendChild(listElement);
       }
     }
+    response.send(dom.serialize());
+  });
+app.get("/graph_*", function(request, response, next) {
+    console.log("process a graph route");
+    let postScript = request.url.replace("/graph_","").replace(".html","") + ".js";
+    let plotDataName = "plot_data_" + postScript;
+    let dom = new jsdom.JSDOM(graphPageContents);
+    let document = dom.window.document;
+    let modificationPoint = document.querySelector("#dataTarget");
+    modificationPoint.setAttribute("src", plotDataName);
     response.send(dom.serialize());
   });
 app.get("*", function(request, response, next) {
