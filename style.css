@@ -15,6 +15,10 @@ body label {
     display: block;
 }
 
+image, iframe {
+    display: center;
+}
+
 #ownAxis input {
     float: left;
 }
