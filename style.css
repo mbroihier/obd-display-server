@@ -2,21 +2,28 @@ h1,p {
     text-align: center;
 }
 
-ul {
-    margin-left: 10em;
+ul, iframe {
+    margin-left: 25%;
+    text-align: center;
+}
+
+li {
+    text-align: left;
 }
 
 body {
     font-family: verdana;
+    color: #7bff00;
+    background-image: url(IMG_3282r2.JPG);
 }
 
-body input,
-body label {
+a {
+    font-family: verdana;
+    color: #7bff00;
+}
+
+body input,body label {
     display: block;
-}
-
-image, iframe {
-    display: center;
 }
 
 #ownAxis input {
