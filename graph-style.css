@@ -2,17 +2,9 @@ h1,p {
     text-align: center;
 }
 
-ul {
+ul, iframe {
     margin-left: 25%;
-    margin-top: 10px;
     text-align: center;
-}
-
-iframe, img {
-    margin-left: 25%;
-    margin-top: 10px;
-    text-align: center;
-    border: 2px solid;
 }
 
 li {
@@ -21,13 +13,12 @@ li {
 
 body {
     font-family: verdana;
-    color: #7bff00;
-    background-image: url(IMG_3282r2.JPG);
+    color: black;
 }
 
 a {
     font-family: verdana;
-    color: #7bff00;
+    color: black;
 }
 
 body input,body label {
